@@ -3,17 +3,14 @@ kind: Ingress
 metadata:
   name: openkm
   annotations:
-    kubernetes.io/ingress.class: traefik
-    certmanager.k8s.io/issuer: letsencrypt-prod-nadineunddavid-ch
-    certmanager.k8s.io/acme-challenge-type: dns01
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  tls:
-  - secretName: nadineunddavid-ch-tls
   rules:
-  - host: docs.nadineunddavid.ch
+  - host: openkm1.101digital.io
     http:
       paths:
       - path: /
         backend:
           serviceName: openkm
-          servicePort: 80 
+          servicePort: 8080

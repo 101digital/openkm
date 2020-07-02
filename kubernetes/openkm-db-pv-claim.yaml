@@ -3,9 +3,10 @@ apiVersion: v1
 metadata:
   name: openkm-db-pv-claim
 spec:
-  storageClassName: manual
   accessModes:
     - ReadWriteOnce
+  #persistentVolumeReclaimPolicy: Retain
+  storageClassName: aws-efs
   resources:
     requests:
       storage: 20Gi

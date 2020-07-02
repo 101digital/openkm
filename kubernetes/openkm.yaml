@@ -16,7 +16,7 @@ spec:
     spec:
       containers: 
       - name: openkm
-        image: gehridav/openkm:6.3.4
+        image: gehridav/openkm
         ports:
         - containerPort: 8080
         volumeMounts:

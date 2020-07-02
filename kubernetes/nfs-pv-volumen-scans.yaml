@@ -7,6 +7,8 @@ spec:
     storage: 10Gi
   accessModes:
     - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: aws-efs
   nfs:
-    server: 192.168.0.10
+    server: 10.0.0.111
     path: "/public/Scan-Ablage"
