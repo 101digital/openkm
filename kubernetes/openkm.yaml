@@ -28,8 +28,8 @@ spec:
         # - mountPath: "/opt/openkm/repository/scans"
           # name: openkm-scans-nfs-storage
         env:
-        - name: MYSQL_DATABASE
-          value: "okmdb"
+        # - name: MYSQL_DATABASE
+          # value: "okmdb"
         - name: MYSQL_USER
           valueFrom:
             secretKeyRef:
@@ -40,29 +40,29 @@ spec:
             secretKeyRef:
               name: openkmdb
               key: password
-        - name: MYSQL_ROOT_PASSWORD
-          valueFrom:        
-            secretKeyRef:   
-              name: openkmdb
-              key: rootpw
-        - name: DATABASE_USER
-          valueFrom:
-            secretKeyRef:
-              name: openkmdb
-              key: username
-        - name: DATABASE_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: openkmdb
-              key: password
-        - name: DATABASE_URL
-          value: "jdbc:mysql://localhost:3306/okmdb?useUnicode=true&characterEncoding=UTF8&serverTimezone=CET&nullNamePatternMatchesAll=true" 
-        - name: DATABASE_DRIVER
-          value: com.mysql.cj.jdbc.Driver
-        - name: TZ
-          value: Europe/Madrid   
-        - name: DATABASE_DIALECT
-          value: com.openkm.db.dialect.MySQL5InnoDBDialect 
+        # - name: MYSQL_ROOT_PASSWORD
+          # valueFrom:        
+            # secretKeyRef:   
+              # name: openkmdb
+              # key: rootpw
+        # - name: DATABASE_USER
+          # valueFrom:
+            # secretKeyRef:
+              # name: openkmdb
+              # key: username
+        # - name: DATABASE_PASSWORD
+          # valueFrom:
+            # secretKeyRef:
+              # name: openkmdb
+              # key: password
+        # - name: DATABASE_URL
+          # value: "jdbc:jdbc:mariadb://localhost:3306/okmdb?useUnicode=true&characterEncoding=UTF8&serverTimezone=CET&nullNamePatternMatchesAll=true" 
+        # - name: DATABASE_DRIVER
+          # value: org.mariadb.jdbc.Driver
+        # - name: TZ
+          # value: Europe/Madrid   
+        # - name: DATABASE_DIALECT
+          # value: com.openkm.db.dialect.MySQL5InnoDBDialect 
         - name: JAVA_OPTS
           value: "-Ddb.host=localhost:3306 -Ddb.username=$(MYSQL_USER) -Ddb.password=$(MYSQL_PASSWORD)"  
       - name: openkm-mariadb
