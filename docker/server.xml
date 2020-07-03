@@ -78,17 +78,17 @@
          <Resource name="jdbc/OpenKMDS" auth="Container" type="javax.sql.DataSource"
           maxActive="100" maxIdle="30" maxWait="10000" validationQuery="select 1"
           username="${db.username}" password="${db.password}" driverClassName="org.mariadb.jdbc.Driver"
-          url="jdbc:mariadb://localhost:3306/okmdb?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=UTF8"/>
+          url="jdbc:mysql://localhost:3306/okmdb?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=UTF8"/>
             
 
          <Resource name="mail/OpenKM" auth="Container" type="javax.mail.Session"
              mail.transport.protocol="smtp"
              mail.smtp.auth="true"
-             mail.smtp.host="smtp.gmail.com"
-             mail.smtp.port="465"
-             mail.smtp.user="gehrig.david@gmail.com"
-             password="clzephahxijlsdkh"
-             mail.smtp.from="gehrig.david@gmail.com"
+             mail.smtp.host="email-smtp.eu-west-1.amazonaws.com"
+             mail.smtp.port="587"
+             mail.smtp.user="AKIAYTMAGUFDDK275XEQ"
+             password="BD6GpJsHA6eDzcZMiPw1JA3OLUD0hgXF1SNhAeyY5usG"
+             mail.smtp.from="notification@101digital.io"
              mail.smtp.quitwait="false"
              mail.smtp.starttls.enable="true"
              mail.smtp.socketFactory.class="javax.net.ssl.SSLSocketFactory"
