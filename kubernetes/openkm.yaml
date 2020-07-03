@@ -16,8 +16,8 @@ spec:
     spec:
       containers: 
       - name: openkm
-        #image: 101digital/openkm:6.3.4
-        image: openkm/openkm-ce:latest
+        image: 101digital/openkm:ce
+        #image: openkm/openkm-ce:latest
         imagePullPolicy: Always  
         ports:
         - containerPort: 8080
@@ -28,6 +28,23 @@ spec:
         # - mountPath: "/opt/openkm/repository/scans"
           # name: openkm-scans-nfs-storage
         env:
+        - name: MYSQL_DATABASE
+          value: "okmdb"
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: openkmdb
+              key: username
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: openkmdb
+              key: password
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:        
+            secretKeyRef:   
+              name: openkmdb
+              key: rootpw
         - name: DATABASE_USER
           valueFrom:
             secretKeyRef:
@@ -41,7 +58,9 @@ spec:
         - name: DATABASE_URL
           value: "jdbc:mysql://localhost:3306/okmdb?useUnicode=true&characterEncoding=UTF8&serverTimezone=CET&nullNamePatternMatchesAll=true" 
         - name: DATABASE_DRIVER
-          value: DATABASE_DRIVER=com.mysql.cj.jdbc.Driver
+          value: com.mysql.cj.jdbc.Driver
+        - name: TZ
+          value: Europe/Madrid   
         - name: DATABASE_DIALECT
           value: com.openkm.db.dialect.MySQL5InnoDBDialect 
         - name: JAVA_OPTS
