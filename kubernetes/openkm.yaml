@@ -16,27 +16,36 @@ spec:
     spec:
       containers: 
       - name: openkm
-        image: gehridav/openkm
+        #image: 101digital/openkm:6.3.4
+        image: openkm/openkm-ce:latest
+        imagePullPolicy: Always  
         ports:
         - containerPort: 8080
+        # command: [ "wait-for-it.sh", "localhost:3306", "--timeout=0", "--strict", "--", "entrypoint.sh" ]
         volumeMounts:
         - mountPath: "/opt/openkm/repository"
           name: openkm-repo-pv-storage
-        - mountPath: "/opt/openkm/repository/scans"
-          name: openkm-scans-nfs-storage
+        # - mountPath: "/opt/openkm/repository/scans"
+          # name: openkm-scans-nfs-storage
         env:
-        - name: MYSQL_USER
+        - name: DATABASE_USER
           valueFrom:
             secretKeyRef:
               name: openkmdb
               key: username
-        - name: MYSQL_PASSWORD
+        - name: DATABASE_PASSWORD
           valueFrom:
             secretKeyRef:
               name: openkmdb
               key: password
+        - name: DATABASE_URL
+          value: "jdbc:mysql://localhost:3306/okmdb?useUnicode=true&characterEncoding=UTF8&serverTimezone=CET&nullNamePatternMatchesAll=true" 
+        - name: DATABASE_DRIVER
+          value: DATABASE_DRIVER=com.mysql.cj.jdbc.Driver
+        - name: DATABASE_DIALECT
+          value: com.openkm.db.dialect.MySQL5InnoDBDialect 
         - name: JAVA_OPTS
-          value: "-Ddb.host=localhost:3306 -Ddb.username=$(MYSQL_USER) -Ddb.password=$(MYSQL_PASSWORD)" 
+          value: "-Ddb.host=localhost:3306 -Ddb.username=$(MYSQL_USER) -Ddb.password=$(MYSQL_PASSWORD)"  
       - name: openkm-mariadb
         image: mariadb:latest
         env:
@@ -74,6 +83,6 @@ spec:
       - name: openkm-db-pv-storage
         persistentVolumeClaim:
          claimName: openkm-db-pv-claim
-      - name: openkm-scans-nfs-storage
-        persistentVolumeClaim:
-         claimName: openkm-scans-nfs-claim
+      # - name: openkm-scans-nfs-storage
+        # persistentVolumeClaim:
+         # claimName: openkm-scans-nfs-claim

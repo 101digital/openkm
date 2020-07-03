@@ -1,4 +1,4 @@
-gehridav/openkm
+openkm/openkm-ce:latest
 
 #LABEL maintainer="gehrig.david@gmail.com"
 #

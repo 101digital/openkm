@@ -78,7 +78,7 @@
          <Resource name="jdbc/OpenKMDS" auth="Container" type="javax.sql.DataSource"
           maxActive="100" maxIdle="30" maxWait="10000" validationQuery="select 1"
           username="${db.username}" password="${db.password}" driverClassName="org.mariadb.jdbc.Driver"
-          url="jdbc:mariadb://${db.host}/okmdb?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=UTF8"/>
+          url="jdbc:mariadb://localhost:3306/okmdb?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=UTF8"/>
             
 
          <Resource name="mail/OpenKM" auth="Container" type="javax.mail.Session"
