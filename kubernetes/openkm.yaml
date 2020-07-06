@@ -17,7 +17,7 @@ spec:
       containers: 
       - name: openkm
         image: 101digital/openkm:ce
-        #image: openkm/openkm-ce:latest
+        #image: openkm/openkm-ce
         imagePullPolicy: Always  
         ports:
         - containerPort: 8080
@@ -25,8 +25,8 @@ spec:
         volumeMounts:
         - mountPath: "/opt/openkm/repository"
           name: openkm-repo-pv-storage
-        # - mountPath: "/opt/openkm/repository/scans"
-          # name: openkm-scans-nfs-storage
+        - mountPath: "/opt/openkm/repository/scans"
+          name: openkm-scans-nfs-storage
         env:
         # - name: MYSQL_DATABASE
           # value: "okmdb"
@@ -102,6 +102,6 @@ spec:
       - name: openkm-db-pv-storage
         persistentVolumeClaim:
          claimName: openkm-db-pv-claim
-      # - name: openkm-scans-nfs-storage
-        # persistentVolumeClaim:
-         # claimName: openkm-scans-nfs-claim
+      - name: openkm-scans-nfs-storage
+        persistentVolumeClaim:
+         claimName: openkm-scans-nfs-claim

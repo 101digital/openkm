@@ -11,6 +11,6 @@ FROM openkm/openkm-ce
 #    rm /opt/openkm/OpenKM-6.3.9.zip
 
 COPY OpenKM.cfg /opt/openkm
-COPY logback.xml /opt/openkm
-COPY server.xml /opt/openkm/conf
+#COPY logback.xml /opt/openkm
+#COPY server.xml /opt/openkm/conf
 COPY mariadb-java-client-2.6.1.jar /opt/openkm/bin
