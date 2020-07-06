@@ -28,7 +28,10 @@ spec:
         - mountPath: "/opt/openkm/repository/scans"
           name: openkm-scans-nfs-storage
         - mountPath: "/opt/openkm/webapp"
-          name: openkm-webapp-storage  
+          name: openkm-webapp-storage
+        - mountPath: "/opt/openkm/PropertyGroups.xml"
+          name: openkm-property-config-map
+          subPath: PropertyGroups.xml
         env:
         # - name: MYSQL_DATABASE
           # value: "okmdb"
@@ -109,4 +112,7 @@ spec:
          claimName: openkm-scans-nfs-claim
       - name: openkm-webapp-storage
         persistentVolumeClaim:
-         claimName: openkm-webapp-claim   
+         claimName: openkm-webapp-claim
+      - name: openkm-property-config-map
+        configMap:
+          name: openkm-property-config-map   

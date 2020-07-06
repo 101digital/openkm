@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE property-groups PUBLIC "-//OpenKM//DTD Property Groups 2.0//EN"
+                                 "http://www.openkm.com/dtd/property-groups-2.0.dtd">
+<property-groups>
+  <property-group label="Meta" name="okg:meta">
+    <input label="name" type="text" name="okp:meta.name"/>
+       <input label="userId" type="text" name="okp:meta.userId"/>
+       <input label="organisationId" type="text" name="okp:meta.organisationId"/>
+       <input label="documentKey" type="text" name="okp:meta.documentKey"/>
+       <input label="companyCode" type="text" name="okp:meta.companyCode"/>
+       <input label="type" type="text" name="okp:meta.type"/>
+      <input label="contentType" type="text" name="okp:meta.contentType"/>  
+  </property-group>
+ </property-groups>
