@@ -27,6 +27,8 @@ spec:
           name: openkm-repo-pv-storage
         - mountPath: "/opt/openkm/repository/scans"
           name: openkm-scans-nfs-storage
+        - mountPath: "/opt/openkm/webapp"
+          name: openkm-webapp-storage  
         env:
         # - name: MYSQL_DATABASE
           # value: "okmdb"
@@ -105,3 +107,6 @@ spec:
       - name: openkm-scans-nfs-storage
         persistentVolumeClaim:
          claimName: openkm-scans-nfs-claim
+      - name: openkm-webapp-storage
+        persistentVolumeClaim:
+         claimName: openkm-webapp-claim   
