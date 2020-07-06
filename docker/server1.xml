@@ -20,12 +20,13 @@
      Documentation at /docs/config/server.html
  -->
 <Server port="8005" shutdown="SHUTDOWN">
-  <Listener className="org.apache.catalina.startup.VersionLoggerListener" />
   <!-- Security listener. Documentation at /docs/config/listeners.html
   <Listener className="org.apache.catalina.security.SecurityListener" />
   -->
   <!--APR library loader. Documentation at /docs/apr.html -->
   <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
+  <!--Initialize Jasper prior to webapps are loaded. Documentation at /docs/jasper-howto.html -->
+  <Listener className="org.apache.catalina.core.JasperListener" />
   <!-- Prevent memory leaks due to use of particular java/javax APIs-->
   <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
   <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
@@ -45,43 +46,74 @@
               pathname="conf/tomcat-users.xml" />
 
     <!-- <Resource name="jdbc/OpenKMDS" auth="Container" type="javax.sql.DataSource"
-            maxTotal="100" maxIdle="30" maxWaitMillis="10000" validationQuery="select 1 from INFORMATION_SCHEMA.SYSTEM_USERS"
+            maxActive="100" maxIdle="30" maxWait="10000" validationQuery="select 1 from INFORMATION_SCHEMA.SYSTEM_USERS"
             username="sa" password="" driverClassName="org.hsqldb.jdbcDriver"
             url="jdbc:hsqldb:${catalina.home}/repository/okmdb"/> -->
+    
+    <!-- <Resource name="jdbc/OpenKMDS" auth="Container" type="javax.sql.DataSource"
+          maxActive="100" maxIdle="30" maxWait="10000" validationQuery="select 1"
+          username="sa" password="sa" driverClassName="org.h2.Driver"
+          url="jdbc:h2:${catalina.home}/repository/okmdb"/> -->
 
     <!-- <Resource name="jdbc/OpenKMDS" auth="Container" type="javax.sql.DataSource"
-            maxTotal="100" maxIdle="30" maxWaitMillis="10000" validationQuery="select 1 from dual"
+            maxActive="100" maxIdle="30" maxWait="10000" validationQuery="select 1 from dual"
             username="openkm" password="*****" driverClassName="oracle.jdbc.driver.OracleDriver"
             url="jdbc:oracle:thin:@localhost:1521:XE"/> -->
 
     <!-- <Resource name="jdbc/OpenKMDS" auth="Container" type="javax.sql.DataSource"
-          maxTotal="100" maxIdle="30" maxWaitMillis="10000" validationQuery="select 1"
+          maxActive="100" maxIdle="30" maxWait="10000" validationQuery="select 1"
           username="sa" password="***" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
           url="jdbc:sqlserver://localhost:1433;databaseName=okmdb"/> -->
 
     <!-- <Resource name="jdbc/OpenKMDS" auth="Container" type="javax.sql.DataSource"
-            maxTotal="100" maxIdle="30" maxWaitMillis="10000" validationQuery="select 1"
+            maxActive="100" maxIdle="30" maxWait="10000" validationQuery="select 1"
             username="openkm" password="*****" driverClassName="org.postgresql.Driver"
             url="jdbc:postgresql://localhost:5432/okmdb"/> -->
 
     <!-- <Resource name="jdbc/OpenKMDS" auth="Container" type="javax.sql.DataSource"
-            maxTotal="100" maxIdle="30" maxWaitMillis="10000" validationQuery="select 1"
+            maxActive="100" maxIdle="30" maxWait="10000" validationQuery="select 1"
             username="openkm" password="*****" driverClassName="com.mysql.jdbc.Driver"
             url="jdbc:mysql://localhost:3306/okmdb?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=UTF8"/> -->
-
-  <!--   <Resource name="jdbc/OpenKMDS" auth="Container" type="javax.sql.DataSource"
-          maxTotal="100" maxIdle="30" maxWaitMillis="10000" validationQuery="select 1"
-          username="sa" password="sa" driverClassName="org.h2.Driver"
-          url="jdbc:h2:${catalina.home}/repository/okmdb"/> -->
-		  
-		  <Resource name="jdbc/OpenKMDS" auth="Container" type="javax.sql.DataSource"
+            
+         <Resource name="jdbc/OpenKMDS" auth="Container" type="javax.sql.DataSource"
           maxActive="100" maxIdle="30" maxWait="10000" validationQuery="select 1"
           username="${db.username}" password="${db.password}" driverClassName="org.mariadb.jdbc.Driver"
           url="jdbc:mariadb://${db.host}/okmdb?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=UTF8"/>
+		  
+		  <Resource name="jdbc/OpenKMDS" auth="Container" type="javax.sql.DataSource"
+          maxTotal="100" maxIdle="30" maxWaitMillis="10000" validationQuery="select 1"
+          username="sa" password="sa" driverClassName="org.h2.Driver"
+          url="jdbc:h2:${catalina.home}/repository/okmdb"/>
+            
 
-    <Resource name="mail/OpenKM" auth="Container" type="javax.mail.Session"
-              mail.smtp.host="localhost" mail.from="noreply@openkm.com"/>
+         <Resource name="mail/OpenKM" auth="Container" type="javax.mail.Session"
+             mail.transport.protocol="smtp"
+             mail.smtp.auth="true"
+             mail.smtp.host="email-smtp.eu-west-1.amazonaws.com"
+             mail.smtp.port="587"
+             mail.smtp.user="AKIAYTMAGUFDDK275XEQ"
+             password="BD6GpJsHA6eDzcZMiPw1JA3OLUD0hgXF1SNhAeyY5usG"
+             mail.smtp.from="notification@101digital.io"
+             mail.smtp.quitwait="false"
+             mail.smtp.starttls.enable="true"
+             mail.smtp.socketFactory.class="javax.net.ssl.SSLSocketFactory"
+             mail.debug="true"/>
 
+    <!-- Cluster - Master & Slave -->
+    <!--
+    <Resource auth="Container" name="jms/ConnectionFactory"
+              type="org.apache.activemq.ActiveMQConnectionFactory"
+              description="JMS Connection Factory"
+              factory="org.apache.activemq.jndi.JNDIReferenceFactory"
+              brokerURL="tcp://localhost:61616"
+              brokerName="HibernateSearchBroker"/>
+
+    <Resource auth="Container" name="queue/HibernateSearch"
+              type="org.apache.activemq.command.ActiveMQQueue"
+              description="Hibernate Search queue"
+              factory="org.apache.activemq.jndi.JNDIReferenceFactory"
+              physicalName="HibernateSearchQueue"/>
+    -->
   </GlobalNamingResources>
 
   <!-- A "Service" is a collection of one or more "Connectors" that share
@@ -170,11 +202,12 @@
              Documentation at: /docs/config/valve.html
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
-               prefix="localhost_access_log" suffix=".txt"
+               prefix="localhost_access_log." suffix=".txt"
                pattern="%h %l %u %t &quot;%r&quot; %s %b" />
 
         <!-- External resources -->
-        <!-- <Context docBase="${catalina.home}/custom" path="/OpenKM/custom" reloadable="true"/> -->
+        <!-- <Context docBase="${catalina.base}/custom" path="/OpenKM/custom" reloadable="true"/> -->
+        <!-- <Context docBase="${catalina.base}/repository/cache/js" path="/OpenKM/cadviewerjs" reloadable="true"/> -->
       </Host>
     </Engine>
   </Service>
