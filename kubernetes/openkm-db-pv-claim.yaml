@@ -4,7 +4,7 @@ metadata:
   name: openkm-db-pv-claim
 spec:
   accessModes:
-    - ReadWriteOnce
+    -  ReadWriteMany
   #persistentVolumeReclaimPolicy: Retain
   storageClassName: aws-efs
   resources:

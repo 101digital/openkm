@@ -4,7 +4,7 @@ metadata:
   name: openkm-scans-nfs-claim
 spec:
   accessModes:
-    - ReadWriteMany
+    -  ReadWriteMany
   storageClassName: aws-efs
   resources:
     requests:
