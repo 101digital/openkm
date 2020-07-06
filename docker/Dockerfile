@@ -1,5 +1,5 @@
-#FROM openkm/openkm-ce
-FROM bscott26/openkm
+FROM openkm/openkm-ce
+#FROM bscott26/openkm
 #LABEL maintainer="gehrig.david@gmail.com"
 #
 #RUN apt-get update && \
