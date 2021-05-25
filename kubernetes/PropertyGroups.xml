@@ -10,5 +10,6 @@
        <input label="companyCode" type="text" name="okp:meta.companyCode"/>
        <input label="type" type="text" name="okp:meta.type"/>
       <input label="contentType" type="text" name="okp:meta.contentType"/>  
+    <input label="language" type="text" name="okp:meta.language"/>  
   </property-group>
  </property-groups>
